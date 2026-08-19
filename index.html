@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareerTrack | Your Career, Organized</title>
+    <title>CareerTrack | Job Application Tracker</title>
 
     <style>
         * {
@@ -59,6 +59,7 @@
             color: #4b5563;
             text-decoration: none;
             font-size: 14px;
+            cursor: pointer;
         }
 
         .nav-item:hover,
@@ -104,24 +105,7 @@
             font-weight: bold;
         }
 
-        /* BUTTON */
-
-        .add-button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .add-button:hover {
-            background: #1d4ed8;
-        }
-
-        /* STATISTICS */
+        /* STATS */
 
         .stats {
             display: grid;
@@ -147,7 +131,7 @@
             font-size: 28px;
         }
 
-        /* APPLICATIONS */
+        /* SECTION */
 
         .section {
             background: white;
@@ -167,23 +151,55 @@
             font-size: 18px;
         }
 
+        /* BUTTON */
+
+        .add-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .add-button:hover {
+            background: #1d4ed8;
+        }
+
+        .delete-button {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: none;
+            padding: 7px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        /* APPLICATION */
+
         .application {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 18px 0;
             border-top: 1px solid #f0f0f0;
+            gap: 15px;
         }
 
         .company {
             display: flex;
             align-items: center;
             gap: 14px;
+            flex: 1;
         }
 
         .company-logo {
             width: 45px;
             height: 45px;
+            min-width: 45px;
             border-radius: 9px;
             background: #eff6ff;
             color: #2563eb;
@@ -201,6 +217,7 @@
         .company p {
             color: #6b7280;
             font-size: 12px;
+            margin-bottom: 3px;
         }
 
         .status {
@@ -208,11 +225,148 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 600;
+            white-space: nowrap;
         }
 
-        .pending {
+        .applied {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .shortlisted {
             background: #fff7ed;
             color: #c2410c;
+        }
+
+        .interview {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .offer {
+            background: #f0fdf4;
+            color: #15803d;
+        }
+
+        .rejected {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 14px;
+            padding: 28px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            font-size: 21px;
+        }
+
+        .close {
+            background: none;
+            border: none;
+            font-size: 25px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .cancel-button {
+            background: #f3f4f6;
+            color: #374151;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        /* EMPTY STATE */
+
+        .empty {
+            text-align: center;
+            padding: 35px 10px;
+            color: #6b7280;
+        }
+
+        .empty-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
         }
 
         /* MOBILE */
@@ -236,12 +390,21 @@
                 padding: 20px;
             }
 
+            .topbar {
+                align-items: flex-start;
+            }
+
             .stats {
                 grid-template-columns: 1fr 1fr;
             }
 
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
             .application {
-                gap: 15px;
+                align-items: flex-start;
             }
         }
     </style>
@@ -251,6 +414,8 @@
 
 <div class="app">
 
+    <!-- SIDEBAR -->
+
     <aside class="sidebar">
 
         <div class="logo">
@@ -259,18 +424,28 @@
 
         <div class="nav-title">Menu</div>
 
-        <a href="#" class="nav-item active">🏠 Dashboard</a>
-        <a href="#" class="nav-item">💼 Applications</a>
-        <a href="#" class="nav-item">📅 Interviews</a>
-        <a href="#" class="nav-item">📊 Statistics</a>
+        <a class="nav-item active">🏠 Dashboard</a>
+
+        <a class="nav-item" onclick="openApplicationForm()">
+            💼 Applications
+        </a>
+
+        <a class="nav-item">📅 Interviews</a>
+
+        <a class="nav-item">📊 Statistics</a>
 
         <div class="nav-title">Career</div>
 
-        <a href="#" class="nav-item">📄 My CV</a>
-        <a href="#" class="nav-item">👤 Profile</a>
-        <a href="#" class="nav-item">⚙️ Settings</a>
+        <a class="nav-item">📄 My CV</a>
+
+        <a class="nav-item">👤 Profile</a>
+
+        <a class="nav-item">⚙️ Settings</a>
 
     </aside>
+
+
+    <!-- MAIN -->
 
     <main class="main">
 
@@ -287,29 +462,35 @@
 
         </div>
 
+
+        <!-- STATISTICS -->
+
         <div class="stats">
 
             <div class="stat-card">
                 <p>Total Applications</p>
-                <h2>0</h2>
+                <h2 id="totalApplications">0</h2>
             </div>
 
             <div class="stat-card">
                 <p>Interviews</p>
-                <h2>0</h2>
+                <h2 id="totalInterviews">0</h2>
             </div>
 
             <div class="stat-card">
                 <p>Offers</p>
-                <h2>0</h2>
+                <h2 id="totalOffers">0</h2>
             </div>
 
             <div class="stat-card">
                 <p>Rejected</p>
-                <h2>0</h2>
+                <h2 id="totalRejected">0</h2>
             </div>
 
         </div>
+
+
+        <!-- APPLICATIONS -->
 
         <section class="section">
 
@@ -317,38 +498,501 @@
 
                 <h2>Recent Applications</h2>
 
-                <button class="add-button">
+                <button class="add-button" onclick="openApplicationForm()">
                     + Add Application
                 </button>
 
             </div>
 
-            <div class="application">
-
-                <div class="company">
-
-                    <div class="company-logo">
-                        —
-                    </div>
-
-                    <div>
-                        <h3>No applications yet</h3>
-                        <p>Start tracking your job search by adding an application.</p>
-                    </div>
-
-                </div>
-
-                <span class="status pending">
-                    Get started
-                </span>
-
-            </div>
+            <div id="applicationsList"></div>
 
         </section>
 
     </main>
 
 </div>
+
+
+<!-- ADD APPLICATION MODAL -->
+
+<div class="modal" id="applicationModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Add Job Application</h2>
+
+            <button class="close" onclick="closeApplicationForm()">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="applicationForm">
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="company">
+                        Company Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        placeholder="e.g. Standard Bank"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="jobTitle">
+                        Job Title *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="jobTitle"
+                        placeholder="e.g. Marketing Assistant"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="e.g. Johannesburg"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="jobType">
+                        Job Type
+                    </label>
+
+                    <select id="jobType">
+
+                        <option value="Full-time">
+                            Full-time
+                        </option>
+
+                        <option value="Part-time">
+                            Part-time
+                        </option>
+
+                        <option value="Contract">
+                            Contract
+                        </option>
+
+                        <option value="Internship">
+                            Internship
+                        </option>
+
+                        <option value="Remote">
+                            Remote
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="salary">
+                        Salary
+                    </label>
+
+                    <input
+                        type="text"
+                        id="salary"
+                        placeholder="e.g. R25,000 per month"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="dateApplied">
+                        Date Applied
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dateApplied"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="status">
+                    Application Status
+                </label>
+
+                <select id="status">
+
+                    <option value="Applied">
+                        Applied
+                    </option>
+
+                    <option value="Shortlisted">
+                        Shortlisted
+                    </option>
+
+                    <option value="Interview">
+                        Interview
+                    </option>
+
+                    <option value="Offer">
+                        Offer
+                    </option>
+
+                    <option value="Rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="jobLink">
+                    Job Posting Link
+                </label>
+
+                <input
+                    type="url"
+                    id="jobLink"
+                    placeholder="https://..."
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="notes">
+                    Notes
+                </label>
+
+                <textarea
+                    id="notes"
+                    placeholder="Add interview details, contact information or other notes..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    onclick="closeApplicationForm()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="add-button"
+                >
+                    Save Application
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    let applications =
+        JSON.parse(localStorage.getItem("careerTrackApplications")) || [];
+
+
+    function openApplicationForm() {
+
+        document
+            .getElementById("applicationModal")
+            .classList.add("show");
+
+    }
+
+
+    function closeApplicationForm() {
+
+        document
+            .getElementById("applicationModal")
+            .classList.remove("show");
+
+    }
+
+
+    document
+        .getElementById("applicationForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            const application = {
+
+                id: Date.now(),
+
+                company:
+                    document.getElementById("company").value,
+
+                jobTitle:
+                    document.getElementById("jobTitle").value,
+
+                location:
+                    document.getElementById("location").value,
+
+                jobType:
+                    document.getElementById("jobType").value,
+
+                salary:
+                    document.getElementById("salary").value,
+
+                dateApplied:
+                    document.getElementById("dateApplied").value,
+
+                status:
+                    document.getElementById("status").value,
+
+                jobLink:
+                    document.getElementById("jobLink").value,
+
+                notes:
+                    document.getElementById("notes").value
+
+            };
+
+
+            applications.push(application);
+
+
+            localStorage.setItem(
+                "careerTrackApplications",
+                JSON.stringify(applications)
+            );
+
+
+            document
+                .getElementById("applicationForm")
+                .reset();
+
+
+            closeApplicationForm();
+
+
+            displayApplications();
+
+        });
+
+
+    function getStatusClass(status) {
+
+        return status
+            .toLowerCase()
+            .replace(" ", "");
+
+    }
+
+
+    function displayApplications() {
+
+        const list =
+            document.getElementById("applicationsList");
+
+
+        list.innerHTML = "";
+
+
+        if (applications.length === 0) {
+
+            list.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">💼</div>
+
+                    <h3>No applications yet</h3>
+
+                    <p>
+                        Start tracking your job search by
+                        adding an application.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        applications.forEach(function(application) {
+
+            const item =
+                document.createElement("div");
+
+            item.className = "application";
+
+
+            item.innerHTML = `
+
+                <div class="company">
+
+                    <div class="company-logo">
+                        ${application.company
+                            .substring(0, 1)
+                            .toUpperCase()}
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            ${application.jobTitle}
+                        </h3>
+
+                        <p>
+                            ${application.company}
+                            ${application.location
+                                ? " · " + application.location
+                                : ""}
+                        </p>
+
+                        <p>
+                            ${application.salary || "Salary not specified"}
+                            · ${application.jobType}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <span class="status ${getStatusClass(application.status)}">
+                    ${application.status}
+                </span>
+
+
+                <button
+                    class="delete-button"
+                    onclick="deleteApplication(${application.id})"
+                >
+                    Delete
+                </button>
+
+            `;
+
+
+            list.appendChild(item);
+
+        });
+
+
+        updateStatistics();
+
+    }
+
+
+    function deleteApplication(id) {
+
+        applications =
+            applications.filter(function(application) {
+
+                return application.id !== id;
+
+            });
+
+
+        localStorage.setItem(
+            "careerTrackApplications",
+            JSON.stringify(applications)
+        );
+
+
+        displayApplications();
+
+    }
+
+
+    function updateStatistics() {
+
+        document.getElementById("totalApplications")
+            .textContent = applications.length;
+
+
+        document.getElementById("totalInterviews")
+            .textContent =
+                applications.filter(function(application) {
+
+                    return application.status === "Interview";
+
+                }).length;
+
+
+        document.getElementById("totalOffers")
+            .textContent =
+                applications.filter(function(application) {
+
+                    return application.status === "Offer";
+
+                }).length;
+
+
+        document.getElementById("totalRejected")
+            .textContent =
+                applications.filter(function(application) {
+
+                    return application.status === "Rejected";
+
+                }).length;
+
+    }
+
+
+    displayApplications();
+
+</script>
 
 </body>
 </html>
