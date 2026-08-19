@@ -3,28 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareerTrack | Job Application Tracker</title>
+    <title>CareerTrack | Your Career, Organized</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 240px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 28px 18px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            padding-left: 12px;
+        }
+
+        .logo span {
+            color: #2563eb;
+        }
+
+        .nav-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 12px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        /* MAIN */
+
+        .main {
+            flex: 1;
+            padding: 35px;
+            max-width: 1400px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .welcome h1 {
+            font-size: 28px;
+            margin-bottom: 7px;
+        }
+
+        .welcome p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .profile {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* BUTTON */
+
+        .add-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .add-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* STATISTICS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .stat-card p {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h2 {
+            font-size: 28px;
+        }
+
+        /* APPLICATIONS */
+
+        .section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .section-header h2 {
+            font-size: 18px;
+        }
+
+        .application {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .company {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .company-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 9px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .company h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .company p {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .pending {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 190px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .application {
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>CareerTrack</h1>
+<div class="app">
 
-    <p>Track your job applications, interviews and career progress.</p>
+    <aside class="sidebar">
 
-    <hr>
+        <div class="logo">
+            Career<span>Track</span>
+        </div>
 
-    <h2>Dashboard</h2>
+        <div class="nav-title">Menu</div>
 
-    <p>Applications: 0</p>
-    <p>Interviews: 0</p>
-    <p>Offers: 0</p>
+        <a href="#" class="nav-item active">🏠 Dashboard</a>
+        <a href="#" class="nav-item">💼 Applications</a>
+        <a href="#" class="nav-item">📅 Interviews</a>
+        <a href="#" class="nav-item">📊 Statistics</a>
 
-    <h2>My Applications</h2>
+        <div class="nav-title">Career</div>
 
-    <button>Add Application</button>
+        <a href="#" class="nav-item">📄 My CV</a>
+        <a href="#" class="nav-item">👤 Profile</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
 
-    <p>No job applications added yet.</p>
+    </aside>
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div class="welcome">
+                <h1>Good morning 👋</h1>
+                <p>Here's an overview of your job search.</p>
+            </div>
+
+            <div class="profile">
+                C
+            </div>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat-card">
+                <p>Total Applications</p>
+                <h2>0</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Interviews</p>
+                <h2>0</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Offers</p>
+                <h2>0</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Rejected</p>
+                <h2>0</h2>
+            </div>
+
+        </div>
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2>Recent Applications</h2>
+
+                <button class="add-button">
+                    + Add Application
+                </button>
+
+            </div>
+
+            <div class="application">
+
+                <div class="company">
+
+                    <div class="company-logo">
+                        —
+                    </div>
+
+                    <div>
+                        <h3>No applications yet</h3>
+                        <p>Start tracking your job search by adding an application.</p>
+                    </div>
+
+                </div>
+
+                <span class="status pending">
+                    Get started
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
 
 </body>
 </html>
